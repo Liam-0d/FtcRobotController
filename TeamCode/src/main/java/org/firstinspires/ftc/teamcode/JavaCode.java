@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 //These imports bring in FTC libraries so we can use motors and gamepads - Android Studio will automatically import as you need them
 
 
@@ -27,12 +28,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
             DcMotor Left;
             DcMotor Bright;
             DcMotor Bleft;
+            DcMotor Cannon;
             //Declaring 2 DcMotors named Right and Left
 
 
-
-            Right = hardwareMap.get(DcMotor.class, "RightMotor");
-            Left = hardwareMap.get(DcMotor.class, "LeftMotor");
+            Cannon = hardwareMap.get(DcMotor.class, "Cannon");
+            Right = hardwareMap.get(DcMotor.class, "RIght");
+            Left = hardwareMap.get(DcMotor.class, "Left");
             Bright = hardwareMap.get(DcMotor.class, "Bright");
             Bleft = hardwareMap.get(DcMotor.class, "Bleft");
             //(Right / Left)- names for the code
@@ -44,6 +46,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
             Left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Bright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Bleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            Cannon.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
        /*
        An OPTIONAL piece of code. ZeroPowerBehavior tells motors what to do when power = 0
 
@@ -59,6 +62,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
             Left.setDirection(DcMotorSimple.Direction.FORWARD);
             Bleft.setDirection(DcMotorSimple.Direction.REVERSE);
             Bright.setDirection(DcMotorSimple.Direction.FORWARD);
+            Cannon.setDirection(DcMotorSimple.Direction.FORWARD);
             //Sets the  default direction for the motor's rotation.(Usually one is FORWARD and one is REVERSE)
 
 
@@ -88,6 +92,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
                 //We can also just  add  a (-) before it.
                 Bright.setPower(-gamepad1.right_stick_y * 0.5);
                 Bleft.setPower(-gamepad1.left_stick_y * 0.5 );
-            }
+                Cannon.setPower(-gamepad1.right_trigger * 0.5);
+
+                if (gamepad1.right_bumper) Cannon.setDirection(DcMotorSimple.Direction.REVERSE);
+                if (gamepad1.left_bumper) Cannon.setDirection(DcMotorSimple.Direction.FORWARD);
+           }
         }
     }
