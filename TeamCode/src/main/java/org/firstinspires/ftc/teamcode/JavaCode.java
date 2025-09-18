@@ -29,14 +29,16 @@ import com.qualcomm.robotcore.hardware.Gamepad;
             DcMotor Bright;
             DcMotor Bleft;
             DcMotor Cannon;
+            DcMotor CannonB;
             //Declaring 2 DcMotors named Right and Left
 
 
             Cannon = hardwareMap.get(DcMotor.class, "Cannon");
-            Right = hardwareMap.get(DcMotor.class, "RIght");
+            Right = hardwareMap.get(DcMotor.class, "Right");
             Left = hardwareMap.get(DcMotor.class, "Left");
             Bright = hardwareMap.get(DcMotor.class, "Bright");
-            Bleft = hardwareMap.get(DcMotor.class, "Bleft");
+            Bleft = hardwareMap.get(DcMotor.class, "BLeft");
+            CannonB = hardwareMap.get(DcMotor.class, "CannonB");
             //(Right / Left)- names for the code
             //(RightMotor/LeftMotor)- match the names you gave motors in the Driver Hub configuration
 
@@ -47,6 +49,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
             Bright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Bleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             Cannon.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            CannonB.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
        /*
        An OPTIONAL piece of code. ZeroPowerBehavior tells motors what to do when power = 0
 
@@ -63,6 +66,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
             Bleft.setDirection(DcMotorSimple.Direction.REVERSE);
             Bright.setDirection(DcMotorSimple.Direction.FORWARD);
             Cannon.setDirection(DcMotorSimple.Direction.FORWARD);
+            CannonB.setDirection(DcMotorSimple.Direction.FORWARD);
             //Sets the  default direction for the motor's rotation.(Usually one is FORWARD and one is REVERSE)
 
 
@@ -93,9 +97,12 @@ import com.qualcomm.robotcore.hardware.Gamepad;
                 Bright.setPower(-gamepad1.right_stick_y * 0.5);
                 Bleft.setPower(-gamepad1.left_stick_y * 0.5 );
                 Cannon.setPower(-gamepad1.right_trigger * 0.5);
+                CannonB.setPower(-gamepad1.right_trigger * 0.5);
 
                 if (gamepad1.right_bumper) Cannon.setDirection(DcMotorSimple.Direction.REVERSE);
                 if (gamepad1.left_bumper) Cannon.setDirection(DcMotorSimple.Direction.FORWARD);
+                if (gamepad1.right_bumper) CannonB.setDirection(DcMotorSimple.Direction.REVERSE);
+                if (gamepad1.left_bumper) CannonB.setDirection(DcMotorSimple.Direction.FORWARD);
            }
         }
     }
