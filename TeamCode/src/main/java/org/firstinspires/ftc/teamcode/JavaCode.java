@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -30,6 +31,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
             DcMotor Bleft;
             DcMotor Cannon;
             DcMotor CannonB;
+            CRServo LadlePull1;
+            CRServo LadlePull2;
             //Declaring 2 DcMotors named Right and Left
 
 
@@ -39,6 +42,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
             Bright = hardwareMap.get(DcMotor.class, "Bright");
             Bleft = hardwareMap.get(DcMotor.class, "BLeft");
             CannonB = hardwareMap.get(DcMotor.class, "CannonB");
+            LadlePull1 = hardwareMap.get(CRServo.class, "LadlePull1");
+            LadlePull2 = hardwareMap.get(CRServo.class, "LadlePull2");
             //(Right / Left)- names for the code
             //(RightMotor/LeftMotor)- match the names you gave motors in the Driver Hub configuration
 
@@ -67,6 +72,9 @@ import com.qualcomm.robotcore.hardware.Gamepad;
             Bright.setDirection(DcMotorSimple.Direction.FORWARD);
             Cannon.setDirection(DcMotorSimple.Direction.FORWARD);
             CannonB.setDirection(DcMotorSimple.Direction.FORWARD);
+            LadlePull1.setDirection(DcMotorSimple.Direction.FORWARD);
+            LadlePull2.setDirection(DcMotorSimple.Direction.FORWARD);
+
             //Sets the  default direction for the motor's rotation.(Usually one is FORWARD and one is REVERSE)
 
 
@@ -103,6 +111,12 @@ import com.qualcomm.robotcore.hardware.Gamepad;
                 if (gamepad1.left_bumper) Cannon.setDirection(DcMotorSimple.Direction.FORWARD);
                 if (gamepad1.right_bumper) CannonB.setDirection(DcMotorSimple.Direction.REVERSE);
                 if (gamepad1.left_bumper) CannonB.setDirection(DcMotorSimple.Direction.FORWARD);
+                LadlePull1.setPower(-gamepad1.left_trigger * 0.5);
+                LadlePull2.setPower(-gamepad1.left_trigger * 0.5);
+                if (gamepad1.dpad_up) LadlePull1.setDirection(CRServo.Direction.REVERSE);
+                if (gamepad1.dpad_up) LadlePull2.setDirection(CRServo.Direction.REVERSE);
+                if (gamepad1.dpad_down) LadlePull1.setDirection(CRServo.Direction.FORWARD);
+                if (gamepad1.dpad_down) LadlePull2.setDirection(CRServo.Direction.FORWARD);
            }
         }
     }
